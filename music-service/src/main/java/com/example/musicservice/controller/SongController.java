@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/songs")
+@RequestMapping("/songs")
 public class SongController {
     private final List<Song> songs = List.of(
             new Song(1, "Dynamite", "BTS", "BE"),

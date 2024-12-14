@@ -40,11 +40,12 @@ public class AuthenticationService {
         Optional<UserEntity> userEntity = userRepository.findByUsername(username);
         Map<String, Object> response = new HashMap<>();
 
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         if (!userEntity.isPresent()) {
             response.put("status", "User Not Found");
             return response;
         }
+
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         String accessToken = generateToken(userEntity.get(), authentication, 3600);
         response.put("access_token", accessToken);
         response.put("expires_in", 3600);
