@@ -3,17 +3,25 @@ spring:
     name: api-gateway
   cloud:
     gateway:
-      mvc:
-        routes:
-          - id: music-service
-            uri: ${MUSIC_SERVICE_ROUTE_URI:http://localhost:8082}
-            predicates:
-              - Path=/api/songs/**
-
-          - id: authentication-service
-            uri: ${AUTH_SERVICE_ROUTE_URI:http://localhost:8081}
-            predicates:
+      routes:
+        - id: authentication-service
+          uri: ${AUTH_SERVICE_ROUTE_URI:http://localhost:8081}
+          predicates:
               - Path=/api/auth/**
+        - id: music-service
+          uri: ${MUSIC_SERVICE_ROUTE_URI:http://localhost:8082}
+          predicates:
+            - Path=/api/songs/**
+          filters:
+            - AuthenticationFilter
 
 server:
   port: 8080
+
+keyStore:
+  path: keystore.jks
+  password: password
+  alias: auth-server
+
+gateway:
+  excludedUrl: /api/auth,/login
