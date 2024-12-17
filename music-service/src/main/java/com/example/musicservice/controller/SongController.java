@@ -13,9 +13,9 @@ import java.util.List;
 @RequestMapping("/songs")
 public class SongController {
     private final List<Song> songs = List.of(
-            new Song(1, "Dynamite", "BTS", "BE"),
-            new Song(2, "Butter", "BTS", "Permission To Dance"),
-            new Song(3, "Permission To Dance", "BTS", "Permission To Dance")
+            new Song(1, "title1", "artist1", "album1"),
+            new Song(2, "title2", "artist2", "album2"),
+            new Song(3, "title3", "artist3", "album3")
     );
 
     @GetMapping
